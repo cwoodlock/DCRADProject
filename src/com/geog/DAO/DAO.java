@@ -30,10 +30,14 @@ public class DAO {
 		
 		// process result set
 		while(myRs.next()) {
+			//Create a new Country Object
 			Country country = new Country();
+			
+			//retrieve data from result set
 			country.setCode(myRs.getString("co_code"));
 			country.setName(myRs.getString("co_name"));
 			country.setDetails(myRs.getString("co_details"));
+			
 			countries.add(country);
 
 		}
