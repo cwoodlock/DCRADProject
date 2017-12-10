@@ -29,10 +29,31 @@ public class CountryController {
 		}
 	}
 	
-	public CountryController(ArrayList<Country> products) {
+	public CountryController(ArrayList<Country> countries) {
 		super();
-		this.products = products;
+		this.countries = countries;
 	}
+	
+	public ArrayList<Country> getCountries() {
+		return countries;
+	}
+	
+	public void setCountries(ArrayList<Country> countries) {
+		this.countries = countries;
+	}
+	
+	public void loadCountries() throws Exception {
+		countries.clear();
+		if (dao != null) {
+			try {
+				countries = dao.loadCountries();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	
 }
