@@ -4,7 +4,6 @@ import java.util.*;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.mysql.jdbc.CommunicationsException;
@@ -52,6 +51,28 @@ public class CountryController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public String addCountry(Country country) {
+		if (dao != null) {
+			try {
+				dao.addCountry(country);
+				return "index";
+			} catch (MySQLIntegrityConstraintViolationException e) {
+				FacesMessage message = new FacesMessage("Error: Country code " + country.getCode() + " already exists");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			} catch (CommunicationsException e) {
+				FacesMessage message = new FacesMessage("Error: Cannot connect to Database");
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			} catch (Exception e) {
+				FacesMessage message = new FacesMessage("Error while trying to insert Country " + country.getCode());
+				FacesContext.getCurrentInstance().addMessage(null, message);
+				return null;
+			}
+		}
+		return null;
 	}
 	
 	

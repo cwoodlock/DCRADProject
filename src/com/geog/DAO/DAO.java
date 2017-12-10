@@ -43,4 +43,21 @@ public class DAO {
 		}
 		return countries;
 	}
+	
+	public void addCountry(Country country) throws Exception {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		
+		myConn = mysqlDS.getConnection();
+		
+		String sql = "insert into country values (?, ?, ?)";
+		myStmt = myConn.prepareStatement(sql);
+		
+		myStmt.setString(1, country.getCode());
+		myStmt.setString(2, country.getName());
+		myStmt.setString(3, country.getDetails());
+		
+		myStmt.execute();			
+	}
 }
