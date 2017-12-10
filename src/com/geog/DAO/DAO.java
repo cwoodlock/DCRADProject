@@ -5,7 +5,7 @@ import java.util.*;
 import javax.naming.*;
 import javax.sql.DataSource;
 
-
+import com.geog.Model.Country;
 
 public class DAO {
 	private DataSource mysqlDS;
@@ -31,7 +31,12 @@ public class DAO {
 		// process result set
 		while(myRs.next()) {
 			Country country = new Country();
-			country.setCode(myRs.getString(""))
+			country.setCode(myRs.getString("co_code"));
+			country.setName(myRs.getString("co_name"));
+			country.setDetails(myRs.getString("co_details"));
+			countries.add(country);
+
 		}
+		return countries;
 	}
 }
