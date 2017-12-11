@@ -13,16 +13,17 @@
 	
 	<h2>Country Code</h2>
 	<br/>
-	
-	<!-- These read in a value and pass it to country -->
-	Country Code : <h:inputText value="#{country.code}" id="countrycode" required="true" requiredMessage="Code is mandatory"></h:inputText>
-	<br/>
-	Country Name: <h:inputText value="#{country.name}" id="name" p:placeholder="Enter Country Name" required="true" requiredMessage="Name is mandatory"></h:inputText>
-    <br/>
-    Country Details: <h:inputText value="#{country.details}" id="details" p:placeholder="Enter Country Details" ></h:inputText>
-     <br/>
-	
-	<!-- This confrms what you want to enter and passes it on -->
-	<h:commandButton value="Add" action="#{countryController.addCountry(country)}"/>
+	<h:form>
+		<!-- These read in a value and pass it to country -->
+		Country Code : <h:inputText value="#{country.code}" id="countrycode" required="true" requiredMessage="Code is mandatory"></h:inputText>
+		<br/>
+		Country Name: <h:inputText value="#{country.name}" id="name" p:placeholder="Enter Country Name" required="true" requiredMessage="Name is mandatory"></h:inputText>
+	    <br/>
+	    Country Details: <h:inputText value="#{country.details}" id="details" p:placeholder="Enter Country Details" ></h:inputText>
+	     <br/>
+		
+		<!-- This confrms what you want to enter and passes it on -->
+		<h:commandButton value="Add" action="#{countryController.addCountry(country)}"/>
+	</h:form>
 </h:body>
 </html>
