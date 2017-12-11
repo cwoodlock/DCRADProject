@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	
+<h:head>
+	<title>Add City</title>
+</h:head>
+<h:body>
+	
+	<h2>Add City</h2>
+	<br/>
+	<h:form>
+		<!-- These read in a value and pass it to country -->
+		City Code : <h:inputText value="#{city.code}" id="citycode" required="true" requiredMessage="City Code is mandatory"></h:inputText>
+		<br/>
+		Country Code: <h:inputText value="#{city.countryCode}" id="countrycode" required="true" requiredMessage="Country Code is mandatory"></h:inputText>
+	    <br/>
+	    Region Code: <h:inputText value="#{city.regCode}" id="regioncode" required="true" requiredMessage="Region Code is mandatory"></h:inputText>
+	    <br/>
+	    Name : <h:inputText value="#{city.name}" id="name" required="true" requiredMessage="Name is mandatory"></h:inputText>
+		<br/>
+		Population: <h:inputText value="#{city.population}" id="population" p:placeholder="0" ></h:inputText>
+	    <br/>
+	    By The Sea: <h:selectOneMenu>
+			<f:selectItem itemValue="true" itemLabel="True" />
+			<f:selectItem itemValue="false" itemLabel="False" />
+		</h:selectOneMenu>
+	    <br/>
+	    Area (KM): <h:inputText value="#{city.area}" id="area" ></h:inputText>
+	    <br/>
+	     
+		
+		<!-- This confirms what you want to enter and passes it on -->
+		<h:commandButton value="Add" action="#{countryController.addCountry(country)}"/>
+	</h:form>
+	
+	<h:link value="Home" outcome="index" />
+	<h:link value="Cities" outcome="cities" />
+</h:body>
+</html>

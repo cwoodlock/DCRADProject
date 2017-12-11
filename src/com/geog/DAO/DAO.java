@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import com.geog.Model.Country;
 import com.geog.Model.Region;
+import com.geog.Model.City;
 
 public class DAO {
 	private DataSource mysqlDS;
@@ -104,6 +105,58 @@ public class DAO {
 		myStmt.setString(2, region.getRegCode());
 		myStmt.setString(3, region.getRegName());
 		myStmt.setString(4, region.getRegDetails());
+		
+		myStmt.execute();			
+	}
+
+
+	public ArrayList<City> loadCity() throws SQLException {
+		ArrayList<City> cities = new ArrayList<City>();
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		myConn = mysqlDS.getConnection();
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery("SELECT * FROM CITY");
+		
+		// process result set
+		while(myRs.next()) {
+			//Create a new Country Object
+			City city = new City();
+			
+			//retrieve data from result set
+			city.setCode(myRs.getString("city_code"));
+			city.setCountryCode(myRs.getString("co_code"));
+			city.setRegCode(myRs.getString("reg_code"));
+			city.setName(myRs.getString("city_name"));
+			city.setPopulation(myRs.getLong("population"));
+			city.setBts(myRs.getBoolean("bts"));
+			city.setArea(myRs.getDouble("area"));
+			
+			cities.add(city);
+			
+		}
+		return cities;
+	}
+	
+	public void addCity(City city) throws Exception {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		myConn = mysqlDS.getConnection();
+		
+		String sql = "insert into city values (?, ?, ?, ?, ?, ?, ?)";
+		myStmt = myConn.prepareStatement(sql);
+		
+		myStmt.setString(1, city.getCode());
+		myStmt.setString(2, city.getCountryCode());
+		myStmt.setString(3, city.getRegCode());
+		myStmt.setString(4, city.getName());
+		myStmt.setFloat(5, city.getPopulation());
+		myStmt.setString(6, city.isBts() ? "true" : "false");
+		myStmt.setDouble(7, city.getArea());
 		
 		myStmt.execute();			
 	}
